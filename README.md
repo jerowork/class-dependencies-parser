@@ -4,7 +4,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/jerowork/object-dependencies-parser.svg?style=flat-square)](https://scrutinizer-ci.com/g/jerowork/object-dependencies-parser)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Packagist Version](https://img.shields.io/packagist/v/jerowork/object-dependencies-parser.svg?style=flat-square&include_prereleases)](https://packagist.org/packages/jerowork/object-dependencies-parser)
-[![PHP Version](https://img.shields.io/badge/php-%5E8.1-8892BF.svg?style=flat-square)](http://www.php.net)
+[![PHP Version](https://img.shields.io/badge/php-%5E8.2-8892BF.svg?style=flat-square)](http://www.php.net)
 
 Parse all dependencies (FQN) used in an object (e.g. class, trait, interface).
 
