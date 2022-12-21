@@ -1,0 +1,51 @@
+{
+    "name": "jerowork/object-dependencies-parser",
+    "description": "Parse all dependencies (FQN) used in an object (e.g. class, trait, interface)",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "parser",
+        "fqn",
+        "fqcn",
+        "dependencies",
+        "reflection"
+    ],
+    "authors": [
+        {
+            "name": "Jeroen de Graaf",
+            "email": "hello@jero.work"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "nikic/php-parser": "^4.15"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.13",
+        "maglnet/composer-require-checker": "^4.5",
+        "phpro/grumphp-shim": "^1.14",
+        "phpstan/phpstan": "^1.9",
+        "phpunit/phpunit": "^9.5",
+        "scrutinizer/ocular": "^1.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jerowork\\ObjectDependenciesParser\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jerowork\\ObjectDependenciesParser\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpro/grumphp-shim": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "phpcsfixer": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --allow-risky=yes",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon"
+    }
+}
