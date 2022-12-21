@@ -27,6 +27,13 @@ $objectDependencies = $parser->parse('/Path/To/file.php');
 print_r(
     $objectDependencies->getDependencyList(),
 );
+
+// This will output e.g.:
+[
+    'Some/Namespace/Class',
+    'Another/Namespace/Trait',
+    // ...
+]
 ```
 
 ## DI service definition
