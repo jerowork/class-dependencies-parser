@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 $finder = (new PhpCsFixer\Finder())
     ->in(__DIR__)
-    ->exclude(['vendor']);
+    ->exclude(['vendor', 'tests/PhpParser/Stub']);
 
 return (new PhpCsFixer\Config())
     ->setRules([
