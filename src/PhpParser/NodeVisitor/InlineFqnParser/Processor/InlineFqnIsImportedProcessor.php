@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor;
 
 use Jerowork\ObjectDependenciesParser\Fqn;
+use Jerowork\ObjectDependenciesParser\ImportedFqn;
 use Jerowork\ObjectDependenciesParser\ObjectDependencies;
 use PhpParser\Node;
 use PhpParser\Node\Name;
@@ -20,11 +21,8 @@ final class InlineFqnIsImportedProcessor implements InlineFqnProcessor
 
     public function process(Node $parent, Name $name, ObjectDependencies $objectDependencies): ?Fqn
     {
+        /** @var ImportedFqn $importedFqn */
         $importedFqn = $objectDependencies->getImportedFqnHavingLastPart($name->parts[0]);
-
-        if ($importedFqn === null) {
-            return null;
-        }
 
         return $this->createInlineFqnBasedOnImportedFqn($importedFqn, $name);
     }

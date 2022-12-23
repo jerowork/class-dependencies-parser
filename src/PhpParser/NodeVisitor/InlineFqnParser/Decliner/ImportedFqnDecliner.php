@@ -11,7 +11,7 @@ use PhpParser\Node\Stmt\GroupUse;
 use PhpParser\Node\Stmt\UseUse;
 
 /**
- * Decline already imported Fqn (use statements).
+ * Decline imported Name nodes.
  */
 final class ImportedFqnDecliner implements InlineFqnDecliner
 {
