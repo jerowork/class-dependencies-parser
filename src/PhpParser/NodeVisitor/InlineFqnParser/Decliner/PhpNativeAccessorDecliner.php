@@ -6,6 +6,7 @@ namespace Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParse
 
 use Jerowork\ObjectDependenciesParser\ObjectDependencies;
 use PhpParser\Node;
+use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Name;
@@ -18,7 +19,11 @@ final class PhpNativeAccessorDecliner implements InlineFqnDecliner
     public function shouldDecline(Node $parent, Name $name, ObjectDependencies $objectDependencies): bool
     {
         // Ignore PHP native accessors
-        return ($parent instanceof New_ || $parent instanceof StaticCall || $parent instanceof ClassMethod)
-            && in_array((string) $name, self::ACCESSORS, true);
+        return (
+            $parent instanceof New_
+            || $parent instanceof StaticCall
+            || $parent instanceof ClassMethod
+            || $parent instanceof ClassConstFetch
+        ) && in_array((string) $name, self::ACCESSORS, true);
     }
 }

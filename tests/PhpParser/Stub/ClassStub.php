@@ -29,6 +29,8 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
     use AliasedTraitFolder\AnotherTrait;
     use SomeTrait;
 
+    private const TEST = 'test';
+
     private \Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Service\AnotherService $service;
 
     public function __construct(
@@ -65,6 +67,8 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
 
         // Constants
         $constant = ConstantInterface::SOME_CONSTANT;
+
+        self::TEST;
 
         return new DateTime();
     }
