@@ -58,6 +58,9 @@ final class PhpParserObjectDependenciesParserTest extends TestCase
             SomeAttribute::class,
             AnotherDto::class,
             SomeDto::class,
+            'Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\aliasedFunction',
+            'Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\anotherFunction',
+            'Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\someFunction',
             AnotherInterface::class,
             SomeInterface::class,
             RootLevelAttribute::class,
@@ -69,6 +72,7 @@ final class PhpParserObjectDependenciesParserTest extends TestCase
             TraitStub::class,
             AnotherTrait::class,
             SomeTrait::class,
+            'Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\rootFunction'
         ], $objectDependencies->getDependencyList());
     }
 

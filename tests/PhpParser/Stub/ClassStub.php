@@ -15,6 +15,8 @@ use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Dto\{
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Interface\SomeInterface;
 use DateTimeImmutable;
 use DateTime;
+use function Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\aliasedFunction as functionAliased;
+use function Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\someFunction;
 
 #[\Attribute]
 /**
@@ -43,6 +45,12 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
     {
         $date = new DateTimeImmutable();
         $zone = new DateTimeZone('Europe/Amsterdam');
+
+        $function = someFunction();
+        $anotherFunction = \Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\anotherFunction();
+
+        rootFunction();
+        functionAliased();
 
         return new DateTime();
     }
