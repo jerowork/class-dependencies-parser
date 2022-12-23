@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub;
 
 use DateTimeZone;
+use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Constants\ConstantInterface;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Service\SomeService as AliasedService;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Trait as AliasedTraitFolder;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Trait\SomeTrait;
@@ -61,6 +62,9 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
 
         $object = static::staticFunction();
         $object = self::staticFunction();
+
+        // Constants
+        $constant = ConstantInterface::SOME_CONSTANT;
 
         return new DateTime();
     }

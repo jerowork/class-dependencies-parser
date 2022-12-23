@@ -13,6 +13,7 @@ use Jerowork\ObjectDependenciesParser\PhpParser\PhpParserObjectDependenciesParse
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\AbstractClass;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Attribute\AnotherAttribute;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Attribute\SomeAttribute;
+use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Constants\ConstantInterface;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Dto\AnotherDto;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Dto\SomeDto;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Interface\AnotherInterface;
@@ -56,6 +57,7 @@ final class PhpParserObjectDependenciesParserTest extends TestCase
             AbstractClass::class,
             AnotherAttribute::class,
             SomeAttribute::class,
+            ConstantInterface::class,
             AnotherDto::class,
             SomeDto::class,
             'Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\aliasedFunction',
