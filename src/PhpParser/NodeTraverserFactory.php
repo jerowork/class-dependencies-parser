@@ -5,6 +5,14 @@ declare(strict_types=1);
 namespace Jerowork\ObjectDependenciesParser\PhpParser;
 
 use Jerowork\ObjectDependenciesParser\ObjectDependencies;
+use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner\ImportedFqnDecliner;
+use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner\NamespaceDecliner;
+use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner\PhpNativeAccessorDecliner;
+use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\FullyQualifiedNameProcessor;
+use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnIsImportedAsAliasProcessor;
+use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnIsImportedProcessor;
+use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnWithinSameNamespaceProcessor;
+use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\PhpNativeFunctionProcessor;
 use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\ParseImportedFqnNodeVisitor;
 use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\ParseInlineFqnNodeVisitor;
 use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\ParseObjectFqnNodeVisitor;
@@ -21,7 +29,21 @@ final class NodeTraverserFactory
         $traverser->addVisitor(new ParentConnectingVisitor());
         $traverser->addVisitor(new ParseObjectFqnNodeVisitor($objectDependencies));
         $traverser->addVisitor(new ParseImportedFqnNodeVisitor($objectDependencies));
-        $traverser->addVisitor(new ParseInlineFqnNodeVisitor($objectDependencies));
+        $traverser->addVisitor(new ParseInlineFqnNodeVisitor(
+            $objectDependencies,
+            [
+                new NamespaceDecliner(),
+                new ImportedFqnDecliner(),
+                new PhpNativeAccessorDecliner(),
+            ],
+            [
+                new FullyQualifiedNameProcessor(),
+                new PhpNativeFunctionProcessor(),
+                new InlineFqnIsImportedProcessor(),
+                new InlineFqnIsImportedAsAliasProcessor(),
+                new InlineFqnWithinSameNamespaceProcessor(),
+            ],
+        ));
 
         return $traverser;
     }
