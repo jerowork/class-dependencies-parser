@@ -33,27 +33,30 @@ final class ParseInlineFqnNodeVisitor extends NodeVisitorAbstract
             return parent::enterNode($node);
         }
 
-        /** @var Node $parent */
-        $parent = $node->getAttribute('parent');
+        $inlineFqn = $this->createInlineFqnBasedOnNodeName($node);
 
+        if ($inlineFqn === null) {
+            return parent::enterNode($node);
+        }
+
+        $this->objectDependencies->addInlineFqn($inlineFqn);
+
+        return parent::enterNode($node);
+    }
+
+    private function createInlineFqnBasedOnNodeName(Name $name): ?Fqn
+    {
+        $parent = $name->getAttribute('parent');
+
+        // Ignore imported statements, namespaces and constants
         if ($parent instanceof ConstFetch
             || $parent instanceof UseUse
             || $parent instanceof GroupUse
             || $parent instanceof Namespace_
         ) {
-            return parent::enterNode($node);
+            return null;
         }
 
-        $inlineFqn = $this->createInlineFqnBasedOnNodeName($parent, $node);
-        if ($inlineFqn !== null) {
-            $this->objectDependencies->addInlineFqn($inlineFqn);
-        }
-
-        return parent::enterNode($node);
-    }
-
-    private function createInlineFqnBasedOnNodeName(Node $parent, Name $name): ?Fqn
-    {
         // Name is already a FQN
         if ($name instanceof FullyQualified) {
             $fqn = Fqn::createFromParts($name->parts);
