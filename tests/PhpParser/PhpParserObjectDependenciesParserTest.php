@@ -72,7 +72,10 @@ final class PhpParserObjectDependenciesParserTest extends TestCase
             TraitStub::class,
             AnotherTrait::class,
             SomeTrait::class,
-            'Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\rootFunction'
+            'Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\rootFunction',
+            'print_r',
+            'sprintf',
+            'str_replace',
         ], $objectDependencies->getDependencyList());
     }
 

@@ -36,6 +36,8 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
         private Interface\AnotherInterface $another,
         private RootLevelService $rootLevelService,
     ) {
+        parent::__construct();
+
         $service = new AliasedService();
     }
 
@@ -52,6 +54,19 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
         rootFunction();
         functionAliased();
 
+        // PHP native functions
+        print_r([\str_replace('t', 'e', 'test')]);
+
+        echo sprintf('hello world %s', 'S');
+
+        $object = static::staticFunction();
+        $object = self::staticFunction();
+
         return new DateTime();
+    }
+
+    public static function staticFunction(): self
+    {
+        return new self();
     }
 }

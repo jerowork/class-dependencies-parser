@@ -6,4 +6,7 @@ namespace Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub;
 
 abstract class AbstractClass
 {
+    public function __construct()
+    {
+    }
 }

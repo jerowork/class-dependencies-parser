@@ -9,8 +9,12 @@ use Jerowork\ObjectDependenciesParser\ImportedFqn;
 use Jerowork\ObjectDependenciesParser\ObjectDependencies;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ConstFetch;
+use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Expr\New_;
+use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Name;
 use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\GroupUse;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\UseUse;
@@ -29,6 +33,7 @@ final class ParseInlineFqnNodeVisitor extends NodeVisitorAbstract
             return parent::enterNode($node);
         }
 
+        /** @var Node $parent */
         $parent = $node->getAttribute('parent');
 
         if ($parent instanceof ConstFetch
@@ -39,7 +44,7 @@ final class ParseInlineFqnNodeVisitor extends NodeVisitorAbstract
             return parent::enterNode($node);
         }
 
-        $inlineFqn = $this->createInlineFqnBasedOnNodeName($node);
+        $inlineFqn = $this->createInlineFqnBasedOnNodeName($parent, $node);
         if ($inlineFqn !== null) {
             $this->objectDependencies->addInlineFqn($inlineFqn);
         }
@@ -47,7 +52,7 @@ final class ParseInlineFqnNodeVisitor extends NodeVisitorAbstract
         return parent::enterNode($node);
     }
 
-    private function createInlineFqnBasedOnNodeName(Name $name): ?Fqn
+    private function createInlineFqnBasedOnNodeName(Node $parent, Name $name): ?Fqn
     {
         // Name is already a FQN
         if ($name instanceof FullyQualified) {
@@ -58,6 +63,17 @@ final class ParseInlineFqnNodeVisitor extends NodeVisitorAbstract
             }
 
             return $fqn;
+        }
+
+        // Ignore PHP native accessors
+        if (($parent instanceof New_ || $parent instanceof StaticCall || $parent instanceof ClassMethod)
+            && in_array((string) $name, PhpNativeDefinitions::ACCESSORS, true)) {
+            return null;
+        }
+
+        // Check if it is a native PHP function
+        if ($parent instanceof FuncCall && in_array((string) $name, PhpNativeDefinitions::FUNCTIONS, true)) {
+            return new Fqn((string) $name);
         }
 
         // Verify if Name is imported
