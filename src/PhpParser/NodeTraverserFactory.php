@@ -12,7 +12,7 @@ use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Proc
 use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnIsImportedAsAliasProcessor;
 use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnIsImportedProcessor;
 use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnWithinSameNamespaceProcessor;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\PhpNativeFunctionProcessor;
+use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\RootLevelFunctionProcessor;
 use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\ParseImportedFqnNodeVisitor;
 use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\ParseInlineFqnNodeVisitor;
 use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\ParseObjectFqnNodeVisitor;
@@ -38,7 +38,7 @@ final class NodeTraverserFactory
             ],
             [
                 new FullyQualifiedNameProcessor(),
-                new PhpNativeFunctionProcessor(),
+                new RootLevelFunctionProcessor(),
                 new InlineFqnIsImportedProcessor(),
                 new InlineFqnIsImportedAsAliasProcessor(),
                 new InlineFqnWithinSameNamespaceProcessor(),

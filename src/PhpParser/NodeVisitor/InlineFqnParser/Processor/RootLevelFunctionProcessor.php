@@ -10,12 +10,14 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 
-final class PhpNativeFunctionProcessor implements InlineFqnProcessor
+/**
+ * All non Fully-qualified Name statements with one name part and exists as function.
+ */
+final class RootLevelFunctionProcessor implements InlineFqnProcessor
 {
     public function shouldProcess(Node $parent, Name $name, ObjectDependencies $objectDependencies): bool
     {
-        return $parent instanceof FuncCall
-            && in_array((string) $name, PhpNativeFunctionList::FUNCTIONS, true);
+        return $parent instanceof FuncCall && count($name->parts) === 1 && function_exists((string) $name);
     }
 
     public function process(Node $parent, Name $name, ObjectDependencies $objectDependencies): ?Fqn
