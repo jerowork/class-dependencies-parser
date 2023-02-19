@@ -8,11 +8,11 @@ use Jerowork\ObjectDependenciesParser\ObjectDependencies;
 use Jerowork\ObjectDependenciesParser\ObjectDependenciesParser;
 use PhpParser\Parser;
 
-final readonly class PhpParserObjectDependenciesParser implements ObjectDependenciesParser
+final class PhpParserObjectDependenciesParser implements ObjectDependenciesParser
 {
     public function __construct(
-        private Parser $parser,
-        private NodeTraverserFactory $traverserFactory,
+        private readonly Parser $parser,
+        private readonly NodeTraverserFactory $traverserFactory,
     ) {
     }
 

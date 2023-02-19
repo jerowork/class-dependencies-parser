@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.1",
         "nikic/php-parser": "^4.15"
     },
     "require-dev": {
@@ -41,6 +41,9 @@
     "config": {
         "allow-plugins": {
             "phpro/grumphp-shim": true
+        },
+        "platform": {
+            "php": "8.1"
         },
         "sort-packages": true
     },

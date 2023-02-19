@@ -6,12 +6,12 @@ namespace Jerowork\ObjectDependenciesParser;
 
 use Stringable;
 
-final readonly class Fqn implements Stringable
+final class Fqn implements Stringable
 {
     private const NAMESPACE_DIVIDER = '\\';
 
     public function __construct(
-        public string $fqn,
+        public readonly string $fqn,
     ) {
     }
 
