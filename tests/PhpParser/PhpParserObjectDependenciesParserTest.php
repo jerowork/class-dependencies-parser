@@ -18,8 +18,10 @@ use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Dto\AnotherDto;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Dto\SomeDto;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Interface\AnotherInterface;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Interface\SomeInterface;
+use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\InterfaceStub;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\RootLevelAttribute;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\RootLevelDto;
+use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\RootLevelEnum;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\RootLevelInterface;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\RootLevelService;
 use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Service\AnotherService;
@@ -67,6 +69,7 @@ final class PhpParserObjectDependenciesParserTest extends TestCase
             SomeInterface::class,
             RootLevelAttribute::class,
             RootLevelDto::class,
+            RootLevelEnum::class,
             RootLevelInterface::class,
             RootLevelService::class,
             AnotherService::class,
@@ -122,6 +125,28 @@ final class PhpParserObjectDependenciesParserTest extends TestCase
             DateTimeZone::class,
             AnotherInterface::class,
             SomeInterface::class,
+            RootLevelAttribute::class,
+            SomeService::class,
+        ], $objectDependencies->getDependencyList());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldGetParseDependenciesForEnum(): void
+    {
+        $class = __DIR__ . '/Stub/RootLevelEnum.php';
+
+        $parser = new PhpParserObjectDependenciesParser(
+            (new ParserFactory())->create(ParserFactory::PREFER_PHP7),
+            new NodeTraverserFactory(),
+        );
+
+        $objectDependencies = $parser->parse($class);
+
+        self::assertSame([
+            DateTimeZone::class,
+            InterfaceStub::class,
             RootLevelAttribute::class,
             SomeService::class,
         ], $objectDependencies->getDependencyList());

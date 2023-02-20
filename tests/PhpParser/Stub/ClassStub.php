@@ -70,6 +70,9 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
 
         self::TEST;
 
+        // Enums
+        $enum = RootLevelEnum::Amsterdam;
+
         return new DateTime();
     }
 
