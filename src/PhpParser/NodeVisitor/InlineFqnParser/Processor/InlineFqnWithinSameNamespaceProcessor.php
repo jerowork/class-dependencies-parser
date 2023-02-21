@@ -19,8 +19,11 @@ final class InlineFqnWithinSameNamespaceProcessor implements InlineFqnProcessor
 
     public function process(Node $parent, Name $name, ObjectDependencies $objectDependencies): ?Fqn
     {
-        /** @var Fqn $objectFqn */
         $objectFqn = $objectDependencies->getFqn();
+
+        if ($objectFqn === null) {
+            return null;
+        }
 
         return new Fqn(sprintf('%s\%s', $objectFqn->getFullFqnWithoutLastPart(), $name));
     }
