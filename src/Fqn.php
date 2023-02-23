@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser;
+namespace Jerowork\ClassDependenciesParser;
 
 use Stringable;
 

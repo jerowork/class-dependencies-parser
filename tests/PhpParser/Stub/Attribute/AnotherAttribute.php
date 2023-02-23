@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Attribute;
+namespace Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Attribute;
 
 use Attribute;
 

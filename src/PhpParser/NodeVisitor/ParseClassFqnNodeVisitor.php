@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor;
+namespace Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor;
 
-use Jerowork\ObjectDependenciesParser\Fqn;
-use Jerowork\ObjectDependenciesParser\ObjectDependencies;
+use Jerowork\ClassDependenciesParser\Fqn;
+use Jerowork\ClassDependenciesParser\ClassDependencies;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Enum_;
@@ -14,13 +14,13 @@ use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Trait_;
 use PhpParser\NodeVisitorAbstract;
 
-final class ParseObjectFqnNodeVisitor extends NodeVisitorAbstract
+final class ParseClassFqnNodeVisitor extends NodeVisitorAbstract
 {
     private ?string $namespace = null;
-    private ?string $objectName = null;
+    private ?string $className = null;
 
     public function __construct(
-        private readonly ObjectDependencies $objectDependencies,
+        private readonly ClassDependencies $classDependencies,
     ) {
     }
 
@@ -31,11 +31,11 @@ final class ParseObjectFqnNodeVisitor extends NodeVisitorAbstract
         }
 
         if ($node instanceof Class_ || $node instanceof Trait_ || $node instanceof Interface_ || $node instanceof Enum_) {
-            $this->objectName = (string) $node->name;
+            $this->className = (string) $node->name;
         }
 
-        if ($this->namespace !== null && $this->objectName !== null) {
-            $this->objectDependencies->setFqn(new Fqn(sprintf('%s\%s', $this->namespace, $this->objectName)));
+        if ($this->namespace !== null && $this->className !== null) {
+            $this->classDependencies->setFqn(new Fqn(sprintf('%s\%s', $this->namespace, $this->className)));
         }
 
         return parent::enterNode($node);

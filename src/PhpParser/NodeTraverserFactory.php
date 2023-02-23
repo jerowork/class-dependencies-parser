@@ -2,35 +2,35 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\PhpParser;
+namespace Jerowork\ClassDependenciesParser\PhpParser;
 
-use Jerowork\ObjectDependenciesParser\ObjectDependencies;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner\ImportedFqnDecliner;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner\NamespaceDecliner;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner\PhpNativeAccessorDecliner;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\FullyQualifiedNameProcessor;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnIsImportedAsAliasProcessor;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnIsImportedProcessor;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnWithinSameNamespaceProcessor;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\RootLevelFunctionProcessor;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\ParseImportedFqnNodeVisitor;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\ParseInlineFqnNodeVisitor;
-use Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\ParseObjectFqnNodeVisitor;
+use Jerowork\ClassDependenciesParser\ClassDependencies;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner\ImportedFqnDecliner;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner\NamespaceDecliner;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner\PhpNativeAccessorDecliner;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\FullyQualifiedNameProcessor;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnIsImportedAsAliasProcessor;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnIsImportedProcessor;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\InlineFqnWithinSameNamespaceProcessor;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor\RootLevelFunctionProcessor;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\ParseImportedFqnNodeVisitor;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\ParseInlineFqnNodeVisitor;
+use Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\ParseClassFqnNodeVisitor;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeTraverserInterface;
 use PhpParser\NodeVisitor\ParentConnectingVisitor;
 
 final class NodeTraverserFactory
 {
-    public function createTraverser(ObjectDependencies $objectDependencies): NodeTraverserInterface
+    public function createTraverser(ClassDependencies $classDependencies): NodeTraverserInterface
     {
         $traverser = new NodeTraverser();
 
         $traverser->addVisitor(new ParentConnectingVisitor());
-        $traverser->addVisitor(new ParseObjectFqnNodeVisitor($objectDependencies));
-        $traverser->addVisitor(new ParseImportedFqnNodeVisitor($objectDependencies));
+        $traverser->addVisitor(new ParseClassFqnNodeVisitor($classDependencies));
+        $traverser->addVisitor(new ParseImportedFqnNodeVisitor($classDependencies));
         $traverser->addVisitor(new ParseInlineFqnNodeVisitor(
-            $objectDependencies,
+            $classDependencies,
             [
                 new NamespaceDecliner(),
                 new ImportedFqnDecliner(),

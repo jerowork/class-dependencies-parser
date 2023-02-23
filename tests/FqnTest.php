@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\Test;
+namespace Jerowork\ClassDependenciesParser\Test;
 
-use Jerowork\ObjectDependenciesParser\Fqn;
+use Jerowork\ClassDependenciesParser\Fqn;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,7 +27,7 @@ final class FqnTest extends TestCase
      */
     public function itShouldCreateFromParts(): void
     {
-        $fqn = Fqn::createFromParts(['Jerowork', 'ObjectDependenciesParser', 'Test', 'FqnTest']);
+        $fqn = Fqn::createFromParts(['Jerowork', 'ClassDependenciesParser', 'Test', 'FqnTest']);
 
         self::assertSame(FqnTest::class, (string) $fqn);
     }
@@ -39,7 +39,7 @@ final class FqnTest extends TestCase
     {
         $fqn = new Fqn(FqnTest::class);
 
-        self::assertSame(['Jerowork', 'ObjectDependenciesParser', 'Test', 'FqnTest'], $fqn->getParts());
+        self::assertSame(['Jerowork', 'ClassDependenciesParser', 'Test', 'FqnTest'], $fqn->getParts());
     }
 
     /**
@@ -49,7 +49,7 @@ final class FqnTest extends TestCase
     {
         $fqn = new Fqn(FqnTest::class);
 
-        self::assertSame('Jerowork\ObjectDependenciesParser\Test', $fqn->getFullFqnWithoutLastPart());
+        self::assertSame('Jerowork\ClassDependenciesParser\Test', $fqn->getFullFqnWithoutLastPart());
     }
 
     /**
@@ -69,7 +69,7 @@ final class FqnTest extends TestCase
     {
         $fqn = new Fqn(FqnTest::class);
 
-        self::assertTrue($fqn->equals(Fqn::createFromParts(['Jerowork', 'ObjectDependenciesParser', 'Test', 'FqnTest'])));
+        self::assertTrue($fqn->equals(Fqn::createFromParts(['Jerowork', 'ClassDependenciesParser', 'Test', 'FqnTest'])));
         self::assertFalse($fqn->equals(Fqn::createFromParts(['Other', 'Class'])));
     }
 }

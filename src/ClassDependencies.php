@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser;
+namespace Jerowork\ClassDependenciesParser;
 
-final class ObjectDependencies
+final class ClassDependencies
 {
     private ?Fqn $fqn = null;
 
@@ -94,7 +94,7 @@ final class ObjectDependencies
     public function getDependencyList(): array
     {
         $dependencies = [
-            ...array_keys(array_filter($this->importedFqn, static fn (ImportedFqn $fqcn): bool => $fqcn->isObject)),
+            ...array_keys(array_filter($this->importedFqn, static fn (ImportedFqn $fqcn): bool => $fqcn->isClass)),
             ...array_keys($this->inlineFqn),
         ];
 

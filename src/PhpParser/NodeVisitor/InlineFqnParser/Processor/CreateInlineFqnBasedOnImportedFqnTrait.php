@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor;
+namespace Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Processor;
 
-use Jerowork\ObjectDependenciesParser\Fqn;
-use Jerowork\ObjectDependenciesParser\ImportedFqn;
+use Jerowork\ClassDependenciesParser\Fqn;
+use Jerowork\ClassDependenciesParser\ImportedFqn;
 use PhpParser\Node\Name;
 
 trait CreateInlineFqnBasedOnImportedFqnTrait
@@ -16,8 +16,8 @@ trait CreateInlineFqnBasedOnImportedFqnTrait
             return null;
         }
 
-        // Set importedFqn as non-object (folder namespace)
-        $importedFqn->isNotObject();
+        // Set importedFqn as non-class (folder namespace)
+        $importedFqn->isNotClass();
 
         $nameParts = $name->parts;
         array_shift($nameParts);

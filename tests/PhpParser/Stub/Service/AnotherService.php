@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Service;
+namespace Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Service;
 
 final class AnotherService
 {

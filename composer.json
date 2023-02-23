@@ -1,5 +1,5 @@
 {
-    "name": "jerowork/object-dependencies-parser",
+    "name": "jerowork/class-dependencies-parser",
     "description": "Parse all dependencies (FQN) used in an object (e.g. class, trait, interface)",
     "license": "MIT",
     "type": "library",
@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Jerowork\\ObjectDependenciesParser\\": "src/"
+            "Jerowork\\ClassDependenciesParser\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Jerowork\\ObjectDependenciesParser\\Test\\": "tests/"
+            "Jerowork\\ClassDependenciesParser\\Test\\": "tests/"
         }
     },
     "config": {

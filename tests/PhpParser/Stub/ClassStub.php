@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub;
+namespace Jerowork\ClassDependenciesParser\Test\PhpParser\Stub;
 
 use DateTimeZone;
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Constants\ConstantInterface;
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Service\SomeService as AliasedService;
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Trait as AliasedTraitFolder;
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Trait\SomeTrait;
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Dto\{
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Constants\ConstantInterface;
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Service\SomeService as AliasedService;
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Trait as AliasedTraitFolder;
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Trait\SomeTrait;
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Dto\{
     SomeDto,
     AnotherDto,
 };
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Interface\SomeInterface;
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Interface\SomeInterface;
 use DateTimeImmutable;
 use DateTime;
-use function Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\aliasedFunction as functionAliased;
-use function Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\someFunction;
+use function Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Function\aliasedFunction as functionAliased;
+use function Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Function\someFunction;
 
 #[\Attribute]
 /**
  * @internal
  */
-final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Interface\AnotherInterface, RootLevelInterface
+final class ClassStub extends AbstractClass implements \Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Interface\AnotherInterface, RootLevelInterface
 {
     use TraitStub;
     use AliasedTraitFolder\AnotherTrait;
@@ -31,7 +31,7 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
 
     private const TEST = 'test';
 
-    private \Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Service\AnotherService $service;
+    private \Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Service\AnotherService $service;
 
     public function __construct(
         #[RootLevelAttribute]
@@ -45,14 +45,14 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
     }
 
     #[Attribute\SomeAttribute(RootLevelDto::class)]
-    #[\Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Attribute\AnotherAttribute]
+    #[\Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Attribute\AnotherAttribute]
     public function some(SomeDto $someDto, AnotherDto $anotherDto): DateTime
     {
         $date = new DateTimeImmutable();
         $zone = new DateTimeZone('Europe/Amsterdam');
 
         $function = someFunction();
-        $anotherFunction = \Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Function\anotherFunction();
+        $anotherFunction = \Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Function\anotherFunction();
 
         rootFunction();
         functionAliased();
@@ -62,8 +62,8 @@ final class ClassStub extends AbstractClass implements \Jerowork\ObjectDependenc
 
         echo sprintf('hello world %s', 'S');
 
-        $object = static::staticFunction();
-        $object = self::staticFunction();
+        $class = static::staticFunction();
+        $class = self::staticFunction();
 
         // Constants
         $constant = ConstantInterface::SOME_CONSTANT;

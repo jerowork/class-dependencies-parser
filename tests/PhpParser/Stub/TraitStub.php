@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub;
+namespace Jerowork\ClassDependenciesParser\Test\PhpParser\Stub;
 
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Dto\AnotherDto;
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Dto\SomeDto;
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Trait\AnotherTrait;
-use Jerowork\ObjectDependenciesParser\Test\PhpParser\Stub\Trait\SomeTrait;
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Dto\AnotherDto;
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Dto\SomeDto;
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Trait\AnotherTrait;
+use Jerowork\ClassDependenciesParser\Test\PhpParser\Stub\Trait\SomeTrait;
 
 trait TraitStub
 {

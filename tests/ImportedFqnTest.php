@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\Test;
+namespace Jerowork\ClassDependenciesParser\Test;
 
-use Jerowork\ObjectDependenciesParser\Fqn;
-use Jerowork\ObjectDependenciesParser\ImportedFqn;
+use Jerowork\ClassDependenciesParser\Fqn;
+use Jerowork\ClassDependenciesParser\ImportedFqn;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -25,14 +25,14 @@ final class ImportedFqnTest extends TestCase
         );
 
         self::assertSame($fqn, $importedFqn->fqn);
-        self::assertTrue($importedFqn->isObject);
+        self::assertTrue($importedFqn->isClass);
         self::assertSame('alias', $importedFqn->alias);
     }
 
     /**
      * @test
      */
-    public function itShouldSetImportedFqnAsNonObject(): void
+    public function itShouldSetImportedFqnAsNonClass(): void
     {
         $importedFqn = new ImportedFqn(
             new Fqn(ImportedFqnTest::class),
@@ -40,10 +40,10 @@ final class ImportedFqnTest extends TestCase
             'alias',
         );
 
-        self::assertTrue($importedFqn->isObject);
+        self::assertTrue($importedFqn->isClass);
 
-        $importedFqn->isNotObject();
+        $importedFqn->isNotClass();
 
-        self::assertFalse($importedFqn->isObject);
+        self::assertFalse($importedFqn->isClass);
     }
 }

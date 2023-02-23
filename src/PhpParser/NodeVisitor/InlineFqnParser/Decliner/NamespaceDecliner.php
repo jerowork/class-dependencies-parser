@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner;
+namespace Jerowork\ClassDependenciesParser\PhpParser\NodeVisitor\InlineFqnParser\Decliner;
 
-use Jerowork\ObjectDependenciesParser\ObjectDependencies;
+use Jerowork\ClassDependenciesParser\ClassDependencies;
 use PhpParser\Node;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Namespace_;
@@ -14,7 +14,7 @@ use PhpParser\Node\Stmt\Namespace_;
  */
 final class NamespaceDecliner implements InlineFqnDecliner
 {
-    public function shouldDecline(Node $parent, Name $name, ObjectDependencies $objectDependencies): bool
+    public function shouldDecline(Node $parent, Name $name, ClassDependencies $classDependencies): bool
     {
         return $parent instanceof Namespace_;
     }

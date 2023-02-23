@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Jerowork\ObjectDependenciesParser;
+namespace Jerowork\ClassDependenciesParser;
 
 final class ImportedFqn
 {
     public function __construct(
         public readonly Fqn $fqn,
-        public bool $isObject,
+        public bool $isClass,
         public readonly ?string $alias,
     ) {
     }
 
-    public function isNotObject(): void
+    public function isNotClass(): void
     {
-        $this->isObject = false;
+        $this->isClass = false;
     }
 }
